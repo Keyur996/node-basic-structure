@@ -1,0 +1,49 @@
+{
+  "name": "structure",
+  "version": "1.0.0",
+  "description": "Basic Node Version - Node Version - 16",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "dev": "nodemon --exec yarn restart",
+    "restart": "rimraf dist && yarn build && yarn start",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "babel",
+    "eslint",
+    "node-basic-structure"
+  ],
+  "author": "Keyur Machhi",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/node": "^7.16.8",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.17.3",
+    "@babel/preset-env": "^7.16.11",
+    "babel-core": "^6.26.3",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.2"
+  },
+  "dependencies": {
+    "chalk": "4.1.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "helmet": "^5.0.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.3.0",
+    "morgan": "^1.10.0"
+  }
+}
