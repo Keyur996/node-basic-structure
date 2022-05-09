@@ -2,8 +2,8 @@ import { cloneDeep, get } from 'lodash';
 
 export class Query {
 
-    constructor(model, queryString) {
-        this.model = model;
+    constructor(query, queryString) {
+        this.query = query;
         this.queryString = queryString
     }
 
@@ -11,12 +11,10 @@ export class Query {
         const clonedQuery = cloneDeep(this.queryString);
         const excludedFields = ['page', 'sort', 'limit', 'fields'];
         excludedFields.forEach(el => delete clonedQuery[el]);
-    
-        // 1B) Advanced filtering
         let queryStr = JSON.stringify(clonedQuery);
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
     
-        this.model = this.model.find(JSON.parse(queryStr));
+        this.query = this.query.find(JSON.parse(queryStr));
         return this;
     }
 
@@ -25,16 +23,27 @@ export class Query {
         const limit = this.queryString.limit * 1 || 100;
         const skip = (page - 1) * limit;
 
-        this.model = this.model.skip(skip).limit(limit);
+        this.query = this.query.skip(skip).limit(limit);
         return this;
     }
 
     sort() {
         if(get(this.queryString, 'sort', '')) {
             const sortBy = this.queryString.sort.split(',').join(' ');
-            this.model = this.model.sort();
+            this.query = this.query.sort(sortBy);
         } else {
-            this.model = this.model.sort('-createdAt');
+            this.query = this.query.sort('-createdAt');
+        }
+
+        return this;
+    }
+
+    limitFields() {
+        if(get(this.queryString, 'fields', '')) {
+            const fields = this.queryString.fields.split(',').join(' ');
+            this.query = this.query.select(fields);
+        } else {
+            this.query = this.query.select('-__v');
         }
 
         return this;

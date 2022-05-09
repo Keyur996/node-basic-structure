@@ -38,12 +38,14 @@
     "rimraf": "^3.0.2"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "chalk": "4.1.2",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "helmet": "^5.0.2",
     "lodash": "^4.17.21",
     "mongoose": "^6.3.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "validator": "^13.7.0"
   }
 }
